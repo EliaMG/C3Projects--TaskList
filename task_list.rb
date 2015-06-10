@@ -10,4 +10,9 @@ class TaskSite < Sinatra::Base
     erb :home
   end
 
+  get "/add_task" do
+    @title = "Add Task"
+    erb :addtask
+  end
+
 end
