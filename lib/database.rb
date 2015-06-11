@@ -18,10 +18,18 @@ module TaskList
       # determine what should be returned
     end
 
+
     private
+
+    # this exists as a placeholder for the method within the parent class, the actual call
+    # will be on the method within the child class Task
+    def create_schema
+    ""
+    end
 
     def query!(statement, *params)
       db = SQLite3::Database.new database_name
+      db.execute(create_schema)
       db.execute statement, params
     rescue SQLite3::Exception => error
       # use this block to recover from an error
@@ -33,4 +41,4 @@ module TaskList
   end
 end
 
-# TaskList::Database.new()
+# TaskList::Database.new(tasklist)

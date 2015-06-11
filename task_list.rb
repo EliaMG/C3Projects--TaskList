@@ -8,6 +8,8 @@ class TaskSite < Sinatra::Base
 
   get "/" do
     @title = "Home"
+    query = TaskList::Task.new("tasklist")
+    @all_tasks = query.all_tasks
     erb :home
   end
 
@@ -23,7 +25,7 @@ class TaskSite < Sinatra::Base
     #@new_task = TaskList::Task.validate_input(@name)
 
 
-    erb :addtask
+    redirect to("/")
   end
 
 end
