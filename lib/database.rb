@@ -10,11 +10,8 @@ module TaskList
 
     def your_custom_query_here(*args)
       # santitize/validate your arguments
-
       # prepare your statement
-
       # call `query!` to interact with the database
-
       # determine what should be returned
     end
 
@@ -32,13 +29,10 @@ module TaskList
       db.execute(create_schema)
       db.execute statement, params
     rescue SQLite3::Exception => error
-      # use this block to recover from an error
-      # consider giving the user a special message back
-      # inspect the `error` object for information about the error
+      puts "Something has gone terribly wrong."
+      puts error.inspect
     ensure
       db.close if db
     end
   end
 end
-
-# TaskList::Database.new(tasklist)

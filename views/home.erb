@@ -1,5 +1,12 @@
 <h1>Welcome to the tasklist database</h1>
 
 <a href="add_task">Add a new task to the list!</a>
-
-<%= @all_tasks %>
+<p>
+  <% @complete.each do |date| %>
+    <% if date == "" %>
+      <%= "To do: #{@all_tasks}" %>
+    <% else %>
+      <%= "Completed tasks: #{@all_tasks}" %>
+    <% end %>
+  <% end %>
+</p>
