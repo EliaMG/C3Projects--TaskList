@@ -2,23 +2,16 @@
 
 <a href="add_task">Add a new task to the list!</a>
 <p>
-  <% @new_array = [] %>
-  <% @completed_tasks = [] %>
-    <% @all_tasks.each do |task| %>
-      <% if task[3] == "" %>
-        <% @new_array.push(task) %>
-        <% else %>
-        <% @completed_tasks.push(task) %>
-      <% end %>
-    <% end %>
 
   <form method="get">
     <fieldset>
       <legend>To Do List:</legend>
       <ul>
+    <% if @new_array %>
       <% @new_array.each do |task| %>
         <li><input type="radio" name="task" value=<%= task[0] %> /><%= task %></li>
       <% end %>
+    <% end %>
       </ul>
       <input type="submit" value="Mark as complete"/>
     </fieldset>
@@ -31,8 +24,10 @@
     <fieldset>
       <legend>Completed Tasks:</legend>
       <ul>
+      <% if @completed_tasks %>
         <% @completed_tasks.each do |task| %>
           <li><%= task %></li>
         <% end %>
+      <% end %>
       </ul>
     </fieldset>
