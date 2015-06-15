@@ -11,8 +11,28 @@
         <% @completed_tasks.push(task) %>
       <% end %>
     <% end %>
-    <%= "To do: #{@new_array}" %>
-    <p><%= "Completed Tasks: #{@completed_tasks}" %></p>
 
+  <form method="get">
+    <fieldset>
+      <legend>To Do List:</legend>
+      <ul>
+      <% @new_array.each do |task| %>
+        <li><input type="radio" name="task" value=<%= task[0] %> /><%= task %></li>
+      <% end %>
+      </ul>
+      <input type="submit" value="Mark as complete"/>
+    </fieldset>
+  </form>
 
-</p>
+<pre>
+  <%= params %>
+  <%= @id %>
+</pre>
+    <fieldset>
+      <legend>Completed Tasks:</legend>
+      <ul>
+        <% @completed_tasks.each do |task| %>
+          <li><%= task %></li>
+        <% end %>
+      </ul>
+    </fieldset>

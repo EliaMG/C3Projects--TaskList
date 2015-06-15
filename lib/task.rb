@@ -9,14 +9,12 @@ module TaskList
     end
 
     def add_task(name, description, completed_date)
-      # validate_input(name)
       query!("insert into tasklist (name, description, completed_date) VALUES (?, ?, ?);", name.to_s, description.to_s, completed_date.to_s)
     end
 
     def update_date(id)
-      @time = Time.now.strftime("%d/%m/%Y")
-      current_id = id
-      query!("update tasklist SET (completed_date=#{@time}) where (id = #{current_id});")
+      # time = Time.now.strftime("%d/%m/%Y")
+      query!("update tasklist SET completed_date='#{Time.now.strftime("%d/%m/%Y")}' where id =#{id};")
     end
 
   private

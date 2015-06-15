@@ -19,16 +19,13 @@ class TaskSite < Sinatra::Base
     erb :addtask
   end
 
-  post "/add_task" do
-    @title = "Add Task"
-    redirect to("/")
-  end
-
   post "/" do
     @title = "Home"
     query = TaskList::Task.new("tasklist")
     query.add_task(params[:name], params[:description], params[:completed_date])
     @all_tasks = query.all_tasks
+    @id = params[:task].to_i
+    query.update_date(@id)
     erb :home
   end
     # binding.pry
