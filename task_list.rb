@@ -2,6 +2,7 @@ require "sinatra"
 require "sinatra/reloader"
 require "./lib/database.rb"
 require "./lib/task.rb"
+# require "pry"
 
 class TaskSite < Sinatra::Base
   register Sinatra::Reloader
@@ -12,6 +13,7 @@ class TaskSite < Sinatra::Base
     @all_tasks = query.all_tasks
     erb :home
   end
+    # binding.pry
 
   get "/add_task" do
     @title = "Add Task"
@@ -20,12 +22,15 @@ class TaskSite < Sinatra::Base
 
   post "/add_task" do
     @title = "Add Task"
-    @task = params[:task]
-
-    #@new_task = TaskList::Task.validate_input(@name)
-
-
     redirect to("/")
+  end
+
+  post "/" do
+    @title = "Home"
+    query = TaskList::Task.new("tasklist")
+    query.add_task(params[:name], params[:description], params[:completed_date])
+    @all_tasks = query.all_tasks
+    erb :home
   end
 
 end

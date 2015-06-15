@@ -3,9 +3,9 @@ require 'sqlite3'
 module TaskList
   class Task < Database
 
-    # def self.validate_input(name)
-    #   raise ArgumentError.new "You must enter a task name" if name == ""
-    # end
+     # def validate_input(name)
+     #   raise ArgumentError.new "You must enter a task name" if name.to_s == ""
+     # end
 
 
     def all_tasks
@@ -13,9 +13,9 @@ module TaskList
     query!(statement)
     end
 
-    def add_task
-      statement = "insert into tasklist (name, description, completed_date) VALUES ('hello' 'hi' 'aug 5');"
-      query!(statement)
+    def add_task(name, description, completed_date)
+      # validate_input(name)
+      query!("insert into tasklist (name, description, completed_date) VALUES (?, ?, ?);", name.to_s, description.to_s, completed_date.to_s)
     end
 
   private
