@@ -29,7 +29,6 @@ class TaskSite < Sinatra::Base
     query = TaskList::Task.new("tasklist")
     query.add_task(params[:name], params[:description], params[:completed_date])
     @all_tasks = query.all_tasks
-    @complete = query.all_tasks[2]
     erb :home
   end
     # binding.pry

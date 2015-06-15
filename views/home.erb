@@ -2,11 +2,17 @@
 
 <a href="add_task">Add a new task to the list!</a>
 <p>
-  <% @complete.each do |date| %>
-    <% if date == "" %>
-      <%= "To do: #{@all_tasks}" %>
-    <% else %>
-      <%= "Completed tasks: #{@all_tasks}" %>
+  <% @new_array = [] %>
+  <% @completed_tasks = [] %>
+    <% @all_tasks.each do |task| %>
+      <% if task[3] == "" %>
+        <% @new_array.push(task) %>
+        <% else %>
+        <% @completed_tasks.push(task) %>
+      <% end %>
     <% end %>
-  <% end %>
+    <%= "To do: #{@new_array}" %>
+    <p><%= "Completed Tasks: #{@completed_tasks}" %></p>
+
+
 </p>
