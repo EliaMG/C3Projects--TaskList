@@ -8,6 +8,26 @@ module TaskList
       query!(statement)
     end
 
+    def get_todo(list)
+      to_do = []
+      list.each do |task|
+        if task[3] == ""
+          to_do.push(task)
+        end
+      end
+     to_do
+    end
+
+    def get_completed(list)
+      completed_tasks = []
+      list.each do  |task|
+        if task[3] != ""
+          completed_tasks.push(task)
+        end
+      end
+      completed_tasks
+    end
+
     def add_task(name, description, completed_date)
       query!("insert into tasklist (name, description, completed_date) VALUES (?, ?, ?);", name.to_s, description.to_s, completed_date.to_s)
     end

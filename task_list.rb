@@ -11,6 +11,14 @@ class TaskSite < Sinatra::Base
     @title = "Home"
     query = TaskList::Task.new("tasklist")
     @all_tasks = query.all_tasks
+
+    @to_do = query.get_todo(@all_tasks)
+
+    @completed_tasks = query.get_completed(@all_tasks)
+
+    @id = params[:task].to_i
+    query.update_date(@id)
+
     erb :home
   end
 
@@ -19,23 +27,29 @@ class TaskSite < Sinatra::Base
     erb :addtask
   end
 
+  post "/add_task" do
+    query = TaskList::Task.new("tasklist")
+
+    query.add_task(params[:name], params[:description], params[:completed_date])
+
+    redirect "/"
+  end
+
   post "/" do
     @title = "Home"
+
     query = TaskList::Task.new("tasklist")
-    query.add_task(params[:name], params[:description], params[:completed_date])
+
     @all_tasks = query.all_tasks
-    @new_array = []
-    @completed_tasks = []
-      @all_tasks.each do |task|
-        if task[3] == ""
-          @new_array.push(task)
-        else
-          @completed_tasks.push(task)
-        end
-      end
+
+    @completed_tasks = query.get_completed(@all_tasks)
+    @to_do = query.get_todo(@all_tasks)
+
     @id = params[:task].to_i
     query.update_date(@id)
+
     erb :home
+    redirect "/"
   end
     # binding.pry
 
