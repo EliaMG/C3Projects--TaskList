@@ -8,14 +8,6 @@ module TaskList
       @database_name = "db/#{ database_name }"
     end
 
-    def your_custom_query_here(*args)
-      # santitize/validate your arguments
-      # prepare your statement
-      # call `query!` to interact with the database
-      # determine what should be returned
-    end
-
-
     private
 
     # this exists as a placeholder for the method within the parent class, the actual call
@@ -26,6 +18,7 @@ module TaskList
 
     def query!(statement, *params)
       db = SQLite3::Database.new database_name
+      #Create the schema for the database
       db.execute(create_schema)
       db.execute statement, params
     rescue SQLite3::Exception => error

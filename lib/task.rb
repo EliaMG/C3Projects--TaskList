@@ -8,6 +8,7 @@ module TaskList
       query!(statement)
     end
 
+    # Creates an array of tasks with an empty 'completed_date' attribute
     def get_todo(list)
       to_do = []
       list.each do |task|
@@ -18,6 +19,7 @@ module TaskList
      to_do
     end
 
+    # Creates an array of tasks with completed dates
     def get_completed(list)
       completed_tasks = []
       list.each do  |task|
@@ -32,13 +34,14 @@ module TaskList
       query!("insert into tasklist (name, description, completed_date) VALUES (?, ?, ?);", name.to_s, description.to_s, completed_date.to_s)
     end
 
+    # Sets 'completed_date to current date'
     def update_date(id)
-      # time = Time.now.strftime("%d/%m/%Y")
       query!("update tasklist SET completed_date='#{Time.now.strftime("%d/%m/%Y")}' where id =#{id};")
     end
 
   private
 
+    # Creates schema for new table 'tasklist' if it doesn't exist in the database already
     def create_schema
       "create table if not exists tasklist (id integer primary key, name text not null, description text, completed_date text);"
     end
